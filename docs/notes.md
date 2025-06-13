@@ -1,6 +1,12 @@
+# JavaScript Notes
+
+---
+
+## 1. Overview
+
+### 1.1 What is JavaScript?
 
 <a name="Introduction"></a>
-## Introduction
 
 ```javascript
 // javascript is used to "make  webpages alive". 
@@ -29,46 +35,48 @@
 // for different purposes in mind, different languages exists which are built on top of js. these are transpiled to js first inorder to be executed in browser .
 
 // js is iniially created for browser only but is now used in other environments as well.
-
-
 ```
+
+### 1.2 IDEs
 
 ```javascript
 // IDE: 
 // *An IDE refers to integrated development environment where developer used to write programs. a typical one consist of a code editor, accesss to file systems, plugins ,debugger and testing tools.
-
 ```
 
+---
 
+## 2. Code Fundamentals
 
 <a name="Code Structure"></a>
-## Code structure
+
+### 2.1 Statements and Semicolons
 
 ```javascript
-
-
-Statements: 
 // statements are syntax constructs and commands that perform actions.
 // they are seperated by semicolons
 
 // semicolons:
 // in most cases semicolons are placed implicitely by js where its required . but there are cases when its not implicitely places though required. 
+```
 
+### 2.2 Strict Mode
+
+```javascript
 // use strict:
 // By  introduction of ecmascript 2015 (es5), many new features were added and modified existing codes. To disable those changes and to have old code working, dont use strict mode. 
 // always use it at the top of the code 
 
 // modern javascript uses 'classes' and 'modules' that enables 'use strict' automatically that you dont want to declare explicitely
-
-
-
-
 ```
 
+---
+
+## 3. JavaScript Execution Model
 
 <a name="basics"></a>
 
-## 1. Basics
+### 3.1 Compilation vs Interpretation
 
 ```javascript
 //Compilation:    Conversion of whole high level code to machine level at a time.
@@ -77,17 +85,19 @@ Statements:
 //Javascript is just in time compiled. ie a compination of compilation and interpretation. JS executes code line by line, the engine finds frequently used code and compiles it to optimized machine code.
 ```
 
-Notes:-
+### 3.2 Notes on Bindings
 
 ```javascript
 //The association of an identifier with a value is generally called a "binding."
 ```
 
+---
+
+## 4. Data Types
+
 <a name="primitives"></a>
 
-### i.Values
-
-#### a.Primitives
+### 4.1 Primitive Types
 
 ```javascript
 // Numbers,Strings, Boolean, Null,Undefined,BigInt and Symbols are the primitive types.
@@ -101,10 +111,12 @@ const num = 9007199254740993; // Inaccurate (JS Number loses precision beyond 2�
 const big = 9007199254740993n; // Accurate (BigInt)
 ```
 
-#### b.special values
+### 4.2 Special Types (Functions, Objects)
 
 ```javascript
 //Includes objects and functions.
+
+//primitive values always existed in the js universe. objects and functions allows us to create our own values.
 
 //"typeof" operator can be used to get the type of a value
 
@@ -113,25 +125,6 @@ const big = 9007199254740993n; // Accurate (BigInt)
 typeof NaN; //number
 
 //Further calculations with NaN will give you NaN again:
-
-//functions:-
-
-//functions are also objects
-
-*let b = function(){ return 7 }
-
-let a = b //points a to the function pointed by b
-
-let a = b()//points a to the value returned by function pointed by b
-
-
-//Objects
-
-let junk = {};
-junk = null; // Doesn't necessarily destroy an object.Instead, JavaScript is a garbage-collected language.
-
-//primitive values always existed in the js universe. objects and functions allows us to create our own values.
-
 // {} always gives a new one.hence {} =={} is false
 
 
@@ -147,8 +140,45 @@ junk = null; // Doesn't necessarily destroy an object.Instead, JavaScript is a g
 
 //object.is(0,-0) returns false
 
+//FUNCTIONS:-
 
-//PROPERTIES:-
+//functions are also objects
+
+*let b = function(){ return 7 }
+
+let a = b //points a to the function pointed by b
+
+let a = b()//points a to the value returned by function pointed by b
+```
+
+---
+
+## 5. Objects in JavaScript
+
+### 5.1 Object Basics
+
+```javascript
+//OBJECTS 
+
+//Objects are simply a collection of non ordered key value pairs. 
+
+//object properties can be accessed either using a dot or a square bracket
+
+//setting property names using quotes is equalent to not using quotes
+
+//"in" can be used to check the existence of a property inside an object
+
+let car = {
+    brand: "Toyota",
+    model:"Innova Hycross"
+}
+console.log("brand" in car)//true
+console.log(brand in car)//true
+```
+
+### 5.2 Object Properties
+
+```javascript
 
 // think of it as wires from objects that point to values.
 
@@ -156,7 +186,16 @@ junk = null; // Doesn't necessarily destroy an object.Instead, JavaScript is a g
 
 //properties dont point at variables. they always point at values
 
+//properties should be inside "" when multi words are used
+//there are no issues for using reserved words as property names
 //new property can  be assinged to an obj using dot operator
+//setting a property as undefined explicitely is valid though its not recommended. null is used actually for an intended empty value. 
+
+//property can be deleted using "delete"
+
+let junk = {};
+junk = null; // Doesn't necessarily destroy an object.Instead, JavaScript is a garbage-collected language.
+
 let car = {
     brand: "Toyota",
     model:"Innova Hycross"
@@ -164,6 +203,35 @@ let car = {
 
 car.type = "petrol"
 console.log(car)//{ brand: 'Toyota', model: 'Innova Hycross', type: 'petrol' }
+```
+
+### 5.3 Mutations
+
+```javascript
+//MUTATIONS
+
+// mutation means change
+
+// it means changing an object’s property 
+
+// since properties can point to different objects, changing it doesnt neccessary mean a change in the object where that property belongs
+
+
+// an alternative to mutation would be to assign an entirely new objet
+
+// A constant that contains an object is an immutable reference to a mutable data value. While the constant itself can't be changed, the properties of the referenced object can be altered, added to, or removed:
+
+// const allow us to write read only variables(**but we can still mutate object properties)
+
+// A new variable can be initialized with let or const inside a descendant block without errors, even if it uses the same identifier as a variable in a parent block:
+
+{
+    let scopedVariable = false;
+    {
+    let scopedVariable = true;
+    }
+    console.log( scopedVariable );//false
+}
 
 
 // rules:
@@ -176,68 +244,65 @@ let student = {
 name:’dani’,
 next:student
 } //invalid
+```
 
+### 5.4 Referencing and Copying
 
-
-//MUTATIONS
-
-// mutation means change
-
-// it means changing an object’s property 
-
-// since properties can point to different objects, changing it doesnt neccessary mean a change in the object where that property belongs
-
-// an alternative to mutation would be to assign an entirely new objet
-
-// A constant that contains an object is an immutable reference to a mutable data value. While the constant itself can't be changed, the properties of the referenced object can be altered, added to, or removed:
-
-// const allow us to write read only variables(**but we can still mutate object properties)
-
-// A new variable can be initialized with let or const inside a descendant block without errors, even if it uses the same identifier as a variable in a parent block:
-
-
-{
-    let scopedVariable = false;
-    {
-    let scopedVariable = true;
-    }
-    console.log( scopedVariable );//false
-}
-
-
-//
-
-let a={
-address:{location:"calicut"}
-}
-
-let b = {
-address: a.address
-}
+```javascript
+let a={ address:{location:"calicut"} }
+let b = { address: a.address }
 
 b.address.location="kannur"
-
-a.address// {location: 'kannur'}
-
-// whereas 
-
-let a={
-address:{location:"calicut"}
-}
-
-let b = {
-address: a.address
-}
+a.address // {location: 'kannur'}
 
 b.address={location :"kannur"}
 a.address //{location: 'calicut'}
 
 
+//using Object.assign()
 
+
+// "Object.assign(dest,..sources)" can be used to assign properties to an existing object with the new ones . do as many in the sources.
+let salaries = {
+  John: 100,
+  Ann: 160,
+  Pete: 130
+}
+Object.assign(salaries,{mary:1000})
+console.log(salaries)//{ John: 100, Ann: 160, Pete: 130, mary: 1000 }
+
+//Object.assign() can also be used for simple object cloning
+let employees = {}
+Object.assign(employees,salaries)//{ John: 100, Ann: 160, Pete: 130, mary: 1000 }
+
+//a simple spread operator syntax can also be used for the same
+let members = {}
+members = {...salaries}
+
+// note  that under the hood , each properties are being copied in a loop when using Object.assing(). ie employees.john = salaries.john, and etc. so when the property is an object, its the reference that's being copied. so mutating it would cause the original to be also changed.  see the example below
+
+
+let user = {
+  name: "John",
+  age: 30,
+  profile:{
+      company:'ABC',
+      place:'Kochi'
+  }
+};
+
+
+let clone = Object.assign({}, user);
+console.log("clone",clone)//clone { name: 'John', age: 30, profile: { company: 'ABC', place: 'Kochi' } }
+clone.age = 40; //doesnt cause original to change
+clone.profile.company = "XYZ" //cause original to change because object was copied by reference
+console.log(user)//{ name: 'John', age: 30, profile: { company: 'XYZ', place: 'Kochi' } }
+```
+
+### 5.5 Prototypes and Inheritance
+
+```javascript
 //PROTOTYPES
-
-//  __proto__ points to the prototype of the object
-
 
 //objects contain an implicit property __proto__
 
@@ -252,8 +317,6 @@ a.address //{location: 'calicut'}
 let man = new Living('male')
 //under the hood
 //man.__proto__ = Living.prototype
-
-
 
 
 
@@ -272,31 +335,35 @@ spider.legs //8
 
 
 // The built-in method hasOwnProperty() checks if a property exists in an object, excluding properties in an object's prototype.
-
 ```
 
+---
 
-<br/>
-
-Notes:-
+## 6. Special Notes on Types
 
 ```javascript
 //null and undefined are the only values of its own type respectively.
 
-typeof null; //object . this is an historical error in js.its actually supposed to be null
-
+typeof null; //object
 typeof undefined; //undefined
 
 //strings have few built in properties. but they are not objects.
 
 //in js universe , object literal is not summoned by calling anything. its just creates a new one.
 
-//object literal is not summoned by calling anything. its just creates a new one.
 
+//object literal is not summoned by calling anything. it's just creates a new one.
+```
+
+---
+
+## 7. Expressions and Scope
+
+```javascript
 //an expression is a valid unit of code that produces a value
 //a function is also an expression. it answers by creating a new fn value every time we asks.
 
-// Assigning a value to a variable without explicitly declaring it (that is, by never using var, let, or const to create it) elevates a variable to the global scope, even when initialized inside of a function or block. A variable created using this pattern is sometimes called an "implied global."
+f// Assigning a value to a variable without explicitly declaring it (that is, by never using var, let, or const to create it) elevates a variable to the global scope, even when initialized inside of a function or block. A variable created using this pattern is sometimes called an "implied global."
 
 function myFunction() {
     globalVariable = "global";
@@ -309,12 +376,13 @@ myFunction()\
 
 globalVariable\
 > "global"
-
 ```
 
-## 1. More Basic Syntax
+---
 
-### i.Variables
+## 8. Basic Syntax (Extended)
+
+### 8.1 Variables
 
 ```javascript
 //variable names can be called as identifiers
@@ -322,4 +390,16 @@ globalVariable\
 //it can start with a letter,_ or $ sign and can contain numbers and unicode characters.but should not include special characters like *,/,\ etc
 
 //varibles always point to values. variables don’t point to each other
+```
+
+---
+
+## 9. Object-Oriented JavaScript
+
+<a name="oops"></a>
+
+### 9.1 Constructor Functions
+
+```javascript
+// Its a convention to use capital for constructor functions
 ```
