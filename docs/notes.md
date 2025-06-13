@@ -9,6 +9,9 @@
 <a name="Introduction"></a>
 
 ```javascript
+
+// javascript is a dynamic programming language primarily used to create interactive behaviour on websites.its one of the core technologies of the web,alongside html and css
+
 // javascript is used to "make  webpages alive". 
 
 // javascript programs are called scripts.
