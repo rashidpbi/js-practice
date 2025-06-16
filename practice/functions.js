@@ -4,7 +4,6 @@ function school(name){
     this.name = name
     this.display= function(){
         console.log("displaying things in school")
-        console.log("this:",this)
     }
 }
 

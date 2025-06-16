@@ -1,27 +1,3 @@
-// understanding the value of this. 
-
-// 1. inside global space, it will be global object. eg: window in case of browsers, global in case of Node. 
-
-// 2. value of "this" inside a function is undefined. But when in  'non strict' mode , due to this substitution , its value will be global object.
-//    it also depends on the way it is called. 
-
-//    function show(){
-//     console.log(this)
-//    }
-//    in strict mode:
-
-//    show()//undefined
-//    window.show()//window
-
-//    in non strict mode:
-//    show()//window
-//    window.show()//window
-
-//3.inside object's method, it references to the object
-//constructor function instances are also objects
-
-//4. arrow fn  doesnt have their own "this". thus its value will be the value of enclosing lexical context
-//5.Inside dom elements, it reference to that html element.
 
 
 
@@ -61,3 +37,12 @@ const attack = ()=>{
     console.log("this inside arrow fn:",this)
 }
 attack()
+
+
+
+// examples:-
+//non strict mode
+function check(){
+    console.log("this:",this)
+}
+check()//window

@@ -464,7 +464,14 @@ console.log(user.profile.place)//"Kochi" ie original not changed. meaning both o
 ```javascript
 //PROTOTYPES
 
-//objects contain an implicit property __proto__
+//a prototype is an object that serves as a blueprint for other objects. It allows objects to inherit properties and methods from another object, enabling prototype-based inheritance.
+
+// a prototype is a property existing on constructor functions that defines what __proto__ of an instance of that function should point to 
+
+//value of prototype method is acutally an object that contains a constructor property that points back to the same constructor function 
+
+
+//objects contain an implicit property __proto__  . also known as internal prototype or  [[prototype]]
 
 //therefore , parent prototype's properties are accessible by the child.
 
