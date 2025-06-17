@@ -236,6 +236,12 @@ let a = b //points a to the function pointed by b
 let a = b()//points a to the value returned by function pointed by b
 
 //function expression:- a way to define  a fn by assigning it to variable or property. (anonymous)
+
+
+//variables inside the inner variables shadows the outer    
+
+
+//VARIABLES AND SCOPE
 ```
 ### 4.3 Type conversion
 
@@ -480,14 +486,23 @@ console.log(user.profile.place)//"Kochi" ie original not changed. meaning both o
 
 //prototype exists as a property in constructor fn. 
 
+//prototype property is only used when its called using "new" 
+
 
 let man = new Living('male')
 //under the hood
 //man.__proto__ = Living.prototype
 
 
+//prototype property has no effect on objects
+
+let player = {
+  name:"ibra"
+  prototype:"bla bla" //no magic 
+}
 
 // though an object.property looks for prototype chaining if that property doesnt exists on its own, assigning new value using dot operator makes new property on that object instead of mutating by looking into prototype chain as shown below.
+
 
 let spider = {
   legs: 8
@@ -495,13 +510,31 @@ let spider = {
 let miles = {
   __proto__: spider
 };
-miles.legs = 2;
+// miles.legs = 2;
+
 
 spider.legs //8
 
 
 
 // The built-in method hasOwnProperty() checks if a property exists in an object, excluding properties in an object's prototype.
+
+//there is no more chaining beyond Object.prototype.
+Object.prototype.__proto__ //null
+
+//always remember that an object can inherit from only one object at a time. ie __proto__ or [[prototype]] can only point to one object
+
+
+//other built-in prototypes
+//when we initialize an array as "let arr = [1,2,3]" , arr gets access to some default methods. this is because internally its equivalent to being used as "new Array()" constructor method. its getting access to these properties from Array.prototype. similarly for Number()  . 
+//ie primitives also store methods in prototypes of wrapper objects: Number.prototype , Array.prototype , Boolean.prototype
+
+//Built in prototypes can be modified or populated with new methods. but its not recommmended to change them
+
+
+
+
+
 ```
 ### 5.6 Garbage collection
 
@@ -731,4 +764,55 @@ let user = new User //both have same effects and are same
 
 //shorthand method cannot be used to create methods in consturctor functions
 
+```
+
+### 9.2 Classes
+
+
+```javascript
+we use classes for creating objects.
+
+class Employee{
+
+  constructor(name){
+    this.name = name
+  }
+  login(){
+    console.log(`${this.name} logged in `)
+  }
+  logout(){
+    console.log(`${this.name} logged out`)
+  }
+
+}
+
+let alice = new Employee("ALICE")
+alice.login()// ALICE logged in 
+
+//under the hood , a fn is created as User. its prototype being the User. (ie User === User.prototype.Constructor). these methods are added to the prototype 
+
+
+
+//note that there is no comma seperation between methods in class
+
+
+
+//in the case of constructor functions , we used "F.prototype.method_name = fn(){}  " to add methods to the prototype. but in the case of classes, we can add methods in a simpler syntax .
+
+
+//class inheritance:-
+
+//classess can iherit properies and methods from a parent. (inheritance)
+
+//parent methods can be overriden 
+
+//built in classes can also be extended
+
+//static properties and methods:-
+//they only belong to classes. they cannot be accessed by instances. 
+
+//private properites and methods:-
+
+//using a "#" before a name(property/method) makes it private 
+//private methods/properties can only be accessed inside the class. not outside. cannot be accessed from subclasses or instances. 
 ```
