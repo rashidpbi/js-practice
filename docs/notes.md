@@ -49,6 +49,19 @@
 
 ---
 
+### 1.3 Logical operations
+
+
+```javascript
+== has more precedence over ||
+|| returns the first truthy value
+&& returns the last truthy value
+
+unary operation (+/-) on a string can convert it to a number
+
+
+````
+
 ## 2. Code Fundamentals
 
 <a name="Code Structure"></a>
@@ -103,10 +116,10 @@
 ### 4.1 Primitive Types
 
 ```javascript
-// Numbers,Strings, Boolean, Null,Undefined,BigInt and Symbols are the primitive types.
+// Number,String, Boolean, Null,Undefined,BigInt and Symbol are the primitive types.
 
 
-//number
+//Number
 Number("10"); //10
 
 //there are special data types like Infinity,-Infinity,NaN that belongs to number data type
@@ -115,6 +128,102 @@ alert(1/0) //Infinity
 String(10); //"10"
 
 //numbers are limited by ±(253-1)
+
+console.log(1 / 0); // Infinity
+console.log("abc" / 2); // NaN
+
+isFinite(5); // true
+isFinite("abc"); // false
+
+
+// isNaN(value) converts the value using Number(value) and checks if its NaN
+isNaN("str") //true
+isNaN(NaN) //true
+isNaN(12) //false
+
+
+
+parseInt("100px"); // 100
+parseFloat("12.5em"); // 12.5
+
+// String
+
+const str = "hello";
+
+console.log(str[1]);      // "e" 
+console.log(str.charAt(1)); // "e" 
+
+console.log(str[9]);      // undefined
+console.log(str.charAt(1)); // "" 
+
+// strings are immutable
+str[0] = "H"; // doesn’t work
+
+// searching
+
+str.indexOf("lo") // position or -1
+
+str.includes("he") // true/false
+
+str.startsWith("he")  //true
+ str.endsWith("lo") //true
+
+ //Array
+
+ //array is used to store a sequence of ordered data where each element can be accessed using its index
+
+ //shift() removes data from beginning
+ //unshift() to add data in the beginning
+
+ //forEach((item,i)=>{})
+
+
+//arrays are compared by reference. not by value
+[1,2] == [1,2] //false
+
+
+//typeof array is an obj
+
+//array methods
+
+[1, 2, 3].find(x => x > 1); // 2
+
+
+
+const arr1 = [1,2,3]
+console.log(arr1.reduce((a,c)=>a+c,0)) //6
+
+[1, 2, 3].reverse(); // [3, 2, 1]
+
+[1, 2].concat([3, 4]); // [1, 2, 3, 4]
+
+[1, 2, 3].indexOf(2);   // 1
+[1, 2, 3].includes(4);  // false
+// sort()  converts the values to their unicode and sort accordinly
+
+//it can optionaly accept two parameters a and b, it should return -1, if a should come before b and 1 if vice versa. 0 if both should be equal in sorting order. 
+
+[4,2,7,1].sort((a,b)=>a-b) //1,2,4,7
+
+[4,2,7,1].sort((a,b)=>b-a) //7,4,2,7
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //BigInt is used to handle large values without losing precision
 
 const num = 9007199254740993; // Inaccurate (JS Number loses precision beyond 2⁵³ - 1)
@@ -227,7 +336,11 @@ NaN ** 0 // 1
 
 //FUNCTIONS:-
 
-//functions are also objects
+//functions are also objects. one of the way to think of functions is 'callable action objects" . we are not only able to call it, but also add or remove properties into it. 
+
+
+
+//
 
 *let b = function(){ return 7 }
 
@@ -238,10 +351,48 @@ let a = b()//points a to the value returned by function pointed by b
 //function expression:- a way to define  a fn by assigning it to variable or property. (anonymous)
 
 
-//variables inside the inner variables shadows the outer    
+//variables inside the inner functions  shadows the outer    
+
+// ARROW FUNCTIONS:-
+// do not use arrow functions if you need your own this, arguments or to construct objects 
 
 
-//VARIABLES AND SCOPE
+// NAMED FUNCTION EXPRESSION (NFE)
+
+// functcions that are written in the form of expression and given a nmae is NFE
+// All functions have  a name property (name of fn). this is asssigned to all fn even if its created without a name.
+// there is a length property which specifies the no of arguments paassed. rest parameter is treated as one ("1").
+eg:-
+function f1(a,b){}
+f1.length //2
+
+// functions can be dynamically created using the new Function syntax by passing strings into it. but their scope is limited to its function . they dont have access to its lexical environment.eg;_
+
+var t;
+let f2= new Function('a','b','return a+b'); //suppose t had a value and u were to use that inside this function, you wont have access because its scope is limited to its function block
+console.log(f2(2,3))
+//CALLBACKS
+
+
+// a callback is a fn passed as an argument to another function to be executed later
+// 1.synchronous callbacks:
+// runs immediately when called. its blocking meaning next code blocks are executed only after this execution
+
+// 2.async callbacks:
+// fn thats executed later after the completion of something. its non blocking  
+
+// callback hell or pyramid of doom:
+// when many callbacks are nested , it becomes hard to read .as in example below:-
+loadScript("1.js", (err) => {
+  if (err) handle(err);
+  else loadScript("2.js", (err) => {
+    if (err) handle(err);
+    else loadScript("3.js", (err) => {
+      if (err) handle(err);
+      else /* do something */;
+    });
+  });
+});
 ```
 ### 4.3 Type conversion
 
@@ -259,12 +410,14 @@ Number("cliche")//NaN
 --------------------------------------
            Number()  | Boolean()
      ""     0             false
+     ' '    0             true
      "0"    0             true
      "12"   12            true
      "sa"   NaN           true
      []     0             true
      null   0             false
 undefined   NaN           false
+     NaN    NaN           false
 
 ----------------------------------------
 
@@ -273,8 +426,89 @@ undefined   NaN           false
 
 //a backslash (\) is  an escape character
 
+//  when null or undefined occurs on either side of the operator, it produces true only if both sides are one of null or undefined.
+
+console.log(null == undefined);
+// → true
+console.log(null == 0);
+// → false
+
+//this helps in being able to check a non existing value clearly. 
+
+//use === for strict checking. for example to check "fast"
+```
+### 4.4 Methods of primitives
+
+```javascript
+
+// Certain methods are possible on primitives except null and undefined because these are wrapped around object that contain default properties
+// these wrappers are light weight and hence optimized by js for each call
+// this wrapper is temporary and is immediately removed. for eg:-
+
+let str = 'hi'
+str.test = "tester"
+console.log(str.length()) //undefined in 'non strict' mode
+//strict mode doesnt allow to add properties to wrapper object.
+
+// in the above case , though test property is added , the wrapper object is immediately removed/disappeared and hence the newly added property cannot be accessed.
+
+```
+### Addtional notes
+
+```javascript
+
+JSON METHODS,  toJSON
+
+what is json?
+// jSON refers to javascript object notation. its a text based language independent format for  storing and exchanging  structured data. it looks like js object but its actually text 
+
+json -> str  JSON.stringify()
+str  -> json JSON.parse()
+   
+
+DESTRUCTURING
+
+destructuring refers to unpacking values from arrays or objects
+
+// a) array destructuring
+// destructuring can work with ierables too. eg:
+let [x,y,z]="bat"//x=b y=a z=t
+//rest oprerator can also be used 
+
+// b) object destructuring
 
 
+
+REST AND SPREAD PARAMETERS
+
+
+
+// 1.REST 
+
+// allows to group items into an array
+// used in function definition
+// allows in flexibility by allowing any number of parameters
+// since converted to array, can do array operations
+
+function log(..rest){ 
+   console.log(...rest) //real array of all args
+}
+
+
+
+
+// 2.SPREAD
+
+// allows to spread items in an array/object
+// used in calls/array/objects
+
+
+let obj = {a:"asf",b:"asf"}
+console.log(...obj) //a:"asf",b:"asf"
+
+Math.max(...[12,23,43]) //43
+let chars = [..."ABC"];    // ["A", "B", "C"]
+let objCopy = {...{x:1, y:2}}; // {x:1, y:2}
 ```
 ---
 
@@ -393,9 +627,17 @@ user.quit()
 // its important to note that a property cannot be assigned to something not of a value. therefore a property cannot be created directly by assigning it to that object itself
 
 let student = {
-name:’dani’,
+name:'dani',
 next:student
 } //invalid
+
+
+// but at the same time, using "this" to reference to the same object wont be an issue because the value of "this" will be substituted only at execution time. 
+
+let student = {
+name:'dani',
+next:this
+} //valid
 ```
 
 ### 5.4 Referencing and Copying
@@ -594,6 +836,12 @@ player = {}//now player gets reassigned to a new object. the old object has noth
 //5.Inside dom elements, it reference to that html element.
 
 
+//note:-
+// object methods are own properties of the object. they  dont inherit from Function.prototype. meaning they are not instances of Function.prototype. but since they are fn, they delegates to Function.prototype hence able to access methods from Function.prototype like bind, call etc. 
+
+
+//value of "this" is undefined in function , code block and object literal
+
 ```
 
 ### 5.8 Optional chaining
@@ -655,7 +903,24 @@ js determines the type to be converted with the help of hints
 Boolean({}) //true
 
 ```
+### 5.10 Global object
 
+```javascript
+
+Global object is the root container for all global variables and functions. 
+
+any variables or functions is set as methods of global by default. eg:-
+
+var x = 34
+console.log(window.x)//34
+
+it varies according to platform. eg:- window (browser), global(node), 
+
+globalThis is the universal name to access it any js environment
+
+adding too many manual properties to global can cause name conflicts, memory leaks etc
+
+```
 ---
 
 ## 6. Special Notes on Types
@@ -714,7 +979,44 @@ globalVariable\
 
 //"dynamic typed " languages are those that allow variables to be not limited to be bounded by any particular data type
 ```
+### 8.2 Variables and closures
 
+```javascript
+// A scope is the space where functions and variables are accessible
+
+// A lexical environment is the space where its hierarchially present
+
+// A function along with its lexical environment forms a closure
+
+
+// in strict mode, fn inside blocks is block scoped.
+
+```
+
+
+#### Temporal dead zone
+
+```javascript
+// Its the period between when a variables scope begins and when its fully initialized. 
+// It only affects the variables declared using let and const . When tried to access at TDZ, it throws a reference error. 
+
+let a = "asd";
+let b = "asd";
+
+[a,b] = ["1","2"];  // Throws TDZ error 
+
+// this happens because in destructuring , for the left hand side evalueation , js tries to access these variables from tdz (since they are declared using let). here destructuring assignment takes place before initialisation. this behaviour in js is to catch potential bugs while destructuring . 
+// if we were to use as below it just works fine
+
+let x = 1;
+[x] = [2];  // Works fine
+
+let y;
+[y] = [2];  // Also works
+
+
+
+```
 ---
 
 ## 9. Object-Oriented JavaScript
@@ -816,3 +1118,251 @@ alice.login()// ALICE logged in
 //using a "#" before a name(property/method) makes it private 
 //private methods/properties can only be accessed inside the class. not outside. cannot be accessed from subclasses or instances. 
 ```
+
+### Getters and setters
+```javascript
+
+// Getters and setters are special methods that allows controlled access and modification to object properties.
+
+let player={
+  firstName:"Zlatan",
+  lastName:"Ibrahimovic",
+
+  get fullName(){
+    return `${this.firstName} ${this.lastName}`
+  },
+  set fullName(name){
+      [this.firstName,this.lastName] = name.split(" ")
+  }
+}
+console.log(player.fullName) //Zlatan Ibrahimovic;
+player.fullName = 'Kyser Soze'
+console.log(player.fullName)   //Kyser Soze
+
+```
+
+### 10. promises , async/await 
+
+```javascript
+
+// promises represents the result of asynchronous operation
+
+// a promise can be resolved or rejected. a promise can be resolved with a value or another promise. 
+//  a promise resolved with a value is said to be fulfilled
+
+
+//chaining of promises
+// in promise chaining, each subsequent  then block gets access to what is returned from the earlier one. resolved value is accessed by the first "then" block that comes after resolve. rejected value is accessed by the first "catch" block that comes after rejection. 
+
+//Promise APIs
+// 1.Promise.all() : returns the first failed if presnet. else waits for all to be resolved and returns the array of their results
+
+//2.Promise.allSettled(): returns an array of settled results be it resolved or rejected
+// 3.Promise.race() : returns the first settled result (resolve or reject)
+// 4.Promise.any(): waits for any of the promise to be resolved. if not it returns the AggregateError (array of errors)
+
+
+// imoortant to note that all erros are caught with catch() 
+
+
+// ASYNC AWAIT
+
+//  all async fn returns a promise. 
+
+// whem a non promise value is returned in an async fn it is implicitely  wrapped  with a promise.resolve(). for eg:-
+
+//a promise 
+async function get(){
+  return 56
+}
+
+get() // Promise {<fulfilled>: 42}
+
+//whereas if an error is thrown it is implicitely wrapped with promise.reject()
+
+
+async function push(){
+  throw new Error("error in pushing")
+}
+push()
+
+
+//prefixing a fn with async always make it return a promise
+
+//AWAIT
+
+// using await makes the fn pause until the settling of that line.eg:-
+
+let result = await promise;
+
+// using async await makes the code easier and cleaner (because there is no need of using then blocks to handle promise)
+
+
+
+
+
+// async await is preferred at sequential async actions where one depends on the other
+
+// TRY CATCH
+
+// using try catch , we are able to handle async await more effectively. any triggered error ("thrown error") caused is passed automatically to the catch block
+
+// finally along with try catch is used for cleanup like releasing files since it will run anyway
+
+
+```
+### Additonal notes
+```javascript
+// Return from a setTimeout function  is ignored.It doesnt make sense to return a value from a setTimeout. 
+
+// loops:
+// "for" and "while" differences primarily in their syntax. 
+// usecases:
+//   for: when known number of iterations. eg: looping through an array
+//   while: to iterate till a condition is met. eg: waiting for user input
+
+// typeof value for "i" in "for in " is always string.(this syntax is generally used
+// for iterating through an object.keys are always string values (except symbols))
+
+let arr = ['apple','bread']
+
+
+arr.forEach((str,i)=>{
+    console.log(str,i) 
+})
+// apple 0
+// bread 1
+
+
+```
+### 11. Modules
+
+```javascript
+
+// A module is a self contained file that organises the code into reusable pieces
+
+// A functionality of a module can be accessed from outside from another one. 
+
+// modules always work in strict mode
+
+// since module uses special keywords , browser should be told to treat it as  a module
+
+// ie <script type="module"></script>
+
+// "this" in a module is undefined
+
+// normal js scripts (<script></script>) execute immediately. but module scripts are executed only after the full load of html page. 
+
+// note that html page is rendered though script may not be loaded fully. better to use loading indicators in those cases. 
+
+// each module has its own global level scope. variables from one dont leak into another 
+
+// Modules must be loaded via HTTP(s)—they don’t work via file:// protocol
+
+// modules can be dynamically imported
+
+let mod = await import(./module)
+mod.doSomething()
+
+
+// The import(module) expression loads the module and returns a promise that resolves into a module object that contains all its exports. It can be called from any place in the code.
+
+// We can use it dynamically in any place of the code, for instance:
+
+let modulePath = prompt("Which module to load?");
+
+// import(modulePath)
+//   .then(obj => <module object>)
+//   .catch(err => <loading error, e.g. if no such module>);
+
+// Re-export syntax "export ... from ... " allows to import things and immediately export them (possibly under another name), like this:
+
+// export {sayHi} from './say.js'; // re-export sayHi
+
+// export {default as User} from './user.js'; // re-export default
+
+
+// Namespace import:
+// Collect all named exports under one object:
+
+import * as say from './say.js';
+say.sayHi('John');
+say.sayBye('John');
+
+
+
+// Alias import
+// Rename imports locally:
+
+import { sayHi as hi, sayBye as bye } from './say.js';
+hi('John');
+bye('John');
+
+
+
+```
+## Browser: Document, Events, Interfaces
+
+### Document
+
+```javascript
+
+Document Object Model (Dom ) is a structural representation of document where elements, attributes and texts are organized as nodes in a tree like hierarchy
+
+
+Browser loads webpage in such a way that it turns HTML into tree structure of nodes
+
+Dom nodes are objects in javascript . they are the instances of classes (like Element,Text,Comment ) that represents part of the html document
+some properties
+
+element.parentNode , childNode, previousSibling, nextSibling, 
+
+Each node has .nodeType property which is  a number
+
+| nodeType | Meaning      |
+| -------- | ------------ |
+| 1        | Element node |
+| 3        | Text node    |
+| 8        | Comment node |
+
+
+nodeName is available on all nodes.
+
+tagName is only for element nodes.
+
+
+children referes to only element nodes whereas childNodes refers to  all including space and comments 
+
+
+
+
+//list of methods
+getElementById()
+getElementsByClassName()
+querySelector() //though usually used with classnames,id etc to accessnodes, can be used with tagnames also
+
+
+
+
+
+Attributes and properties:
+
+<input type="checkbox" checked>
+
+const elem = document.querySelector('input')
+elem.getAttribute("type") //checkbox
+elem.checked //true
+elem.setAttribute('class', 'form')
+
+// others:
+
+elem.hasAttribute(name)
+elem.removeAttribute(name)
+elem.attributes // a live NamedNodeMap of all attributes
+
+<input data-id="test"  />
+
+
+
+// tagName property is the uppercase name of an element's tag
+``` 
