@@ -53,11 +53,11 @@
 
 
 ```javascript
-== has more precedence over ||
-|| returns the first truthy value
-&& returns the last truthy value
+// == has more precedence over ||
+// || returns the first truthy value
+// && returns the last truthy value
 
-unary operation (+/-) on a string can convert it to a number
+// unary operation (+/-) on a string can convert it to a number
 
 
 ````
@@ -206,22 +206,6 @@ console.log(arr1.reduce((a,c)=>a+c,0)) //6
 [4,2,7,1].sort((a,b)=>a-b) //1,2,4,7
 
 [4,2,7,1].sort((a,b)=>b-a) //7,4,2,7
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 //BigInt is used to handle large values without losing precision
@@ -884,22 +868,22 @@ school.open?.() //opening school
 
 ```javascript
 
-unlike other languages there are no mathematical operation between objects 
+// unlike other languages there are no mathematical operation between objects 
 
-objects are converted to primitives before operations
-
-
-All objects are true in a boolean context
+// objects are converted to primitives before operations
 
 
-other mathematical operations apply when a number is expected out of the operation 
-
-example for string conversion is when alert(obj) is used. there are other cotexts also 
-
-we can implement string and number conversions ourselves by using the object methods
+// All objects are true in a boolean context
 
 
-js determines the type to be converted with the help of hints
+// other mathematical operations apply when a number is expected out of the operation 
+
+// example for string conversion is when alert(obj) is used. there are other cotexts also 
+
+// we can implement string and number conversions ourselves by using the object methods
+
+
+// js determines the type to be converted with the help of hints
 Boolean({}) //true
 
 ```
@@ -907,18 +891,18 @@ Boolean({}) //true
 
 ```javascript
 
-Global object is the root container for all global variables and functions. 
+// Global object is the root container for all global variables and functions. 
 
-any variables or functions is set as methods of global by default. eg:-
+// any variables or functions is set as methods of global by default. eg:-
 
 var x = 34
 console.log(window.x)//34
 
-it varies according to platform. eg:- window (browser), global(node), 
+// it varies according to platform. eg:- window (browser), global(node), 
 
-globalThis is the universal name to access it any js environment
+// globalThis is the universal name to access it any js environment
 
-adding too many manual properties to global can cause name conflicts, memory leaks etc
+// adding too many manual properties to global can cause name conflicts, memory leaks etc
 
 ```
 ---
@@ -1307,17 +1291,17 @@ bye('John');
 
 ```javascript
 
-Document Object Model (Dom ) is a structural representation of document where elements, attributes and texts are organized as nodes in a tree like hierarchy
+// Document Object Model (Dom ) is a structural representation of document where elements, attributes and texts are organized as nodes in a tree like hierarchy
 
 
-Browser loads webpage in such a way that it turns HTML into tree structure of nodes
+// Browser loads webpage in such a way that it turns HTML into tree structure of nodes
 
-Dom nodes are objects in javascript . they are the instances of classes (like Element,Text,Comment ) that represents part of the html document
-some properties
+// Dom nodes are objects in javascript . they are the instances of classes (like Element,Text,Comment ) that represents part of the html document
+// some properties
 
-element.parentNode , childNode, previousSibling, nextSibling, 
+// element.parentNode , childNode, previousSibling, nextSibling, 
 
-Each node has .nodeType property which is  a number
+// Each node has .nodeType property which is  a number
 
 | nodeType | Meaning      |
 | -------- | ------------ |
@@ -1326,12 +1310,12 @@ Each node has .nodeType property which is  a number
 | 8        | Comment node |
 
 
-nodeName is available on all nodes.
+// nodeName is available on all nodes.
 
-tagName is only for element nodes.
+// tagName is only for element nodes.
 
 
-children referes to only element nodes whereas childNodes refers to  all including space and comments 
+// children referes to only element nodes whereas childNodes refers to  all including space and comments 
 
 
 
@@ -1342,12 +1326,9 @@ getElementsByClassName()
 querySelector() //though usually used with classnames,id etc to accessnodes, can be used with tagnames also
 
 
+// Attributes and properties:
 
-
-
-Attributes and properties:
-
-<input type="checkbox" checked>
+// <input type="checkbox" checked>
 
 const elem = document.querySelector('input')
 elem.getAttribute("type") //checkbox
