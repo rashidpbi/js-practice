@@ -680,8 +680,6 @@ clone.age = 40; //doesnt cause original to change
 clone.profile.company = "XYZ" //cause original to change because object was copied by reference
 console.log(user)//{ name: 'John', age: 30, profile: { company: 'XYZ', place: 'Kochi' } }
 
-
-
 //structuredClone()
 //this when used be able to copy nested objects too. 
 
@@ -740,7 +738,6 @@ let miles = {
 
 
 spider.legs //8
-
 
 
 // The built-in method hasOwnProperty() checks if a property exists in an object, excluding properties in an object's prototype.
@@ -1182,9 +1179,6 @@ let result = await promise;
 // using async await makes the code easier and cleaner (because there is no need of using then blocks to handle promise)
 
 
-
-
-
 // async await is preferred at sequential async actions where one depends on the other
 
 // TRY CATCH
@@ -1316,7 +1310,6 @@ bye('John');
 
 
 // children referes to only element nodes whereas childNodes refers to  all including space and comments 
-
 
 
 
