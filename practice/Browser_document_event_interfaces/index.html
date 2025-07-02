@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./indexStyles.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Our world</h1>
+
+    <h3>What are you looking for?</h3>
+    <div class="red">happiness?</div>
+    <div class="red" id="money">money ?</div>
+    <div id="publicity">publicity?</div>
+    <div>power?</div>
+    <div class="red">status?</div>
+    <div class="container">
+      <div id="treasure">Treasure (better be hidden)</div>
+      <div id="toggleTreasure">toggle</div>
+    </div>
+
+    <div>
+        <div id="scroll-up">scroll up + </div>
+        <div id="scroll-down">scroll down - </div>
+    </div>
+
+    <div>Now lets see how events are propogated from child to parent and vice versa</div>
+
+    <div class="grandParent"> <div class="parent"> <p class="child">i am a child with a parent and grandparent </p></div></div>
+    <script src="./index.js"></script>
+  </body>
+</html>

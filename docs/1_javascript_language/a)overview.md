@@ -34,6 +34,8 @@
 // for different purposes in mind, different languages exists which are built on top of js. these are transpiled to js first inorder to be executed in browser .
 
 // js is iniially created for browser only but is now used in other environments as well.
+
+//if an unhandled error (like reference error, typeError ) is thrown in a script, js will stop executing further lines of the code. 
 ```
 
 ### 1.2 IDEs

@@ -1,0 +1,19 @@
+.blue{
+    color: blue;
+}
+
+.hidden{
+    display: none;
+}
+
+.active{
+    display: block;
+}
+
+.container{
+    display: flex;
+}
+
+/* #money{
+    background-color: purple;
+} */
