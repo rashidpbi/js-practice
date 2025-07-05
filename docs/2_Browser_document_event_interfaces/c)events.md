@@ -83,4 +83,18 @@ function sayThanks(){
 
 
 // preventDefault and alert  has no effect in unload. 
+
+//#event delegation:
+// since event bubbles up all the way up through parents, it can be listened by adding an event handler on parent instead of attaching on all 
+// individual child elements. this is called event delegation . 
+
+// e.target is the actual element clicked . u can get tagName, classList, dataset etc from it
+
+//#default browser action 
+
+//using event.preventDefault() or using "return false" inside a tag for on<event> events
+
+//not all events are cancelable. eg: 
+//              if(e.cancelable) e.preventDefault() 
+
 ```

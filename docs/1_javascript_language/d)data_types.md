@@ -338,7 +338,8 @@ what is json?
 json -> str  JSON.stringify()
 str  -> json JSON.parse()
    
-
+// in case of using stringify to store in local storage for example, instead of storing the object as its direct conversion to string, variable values in object is valuated and then converted to string and stored?
+// in case of parsing when used to retrieve data from local storage for example, instead of just removing the "strings" the actual object is retrieved along with its prototype
 DESTRUCTURING
 
 destructuring refers to unpacking values from arrays or objects

@@ -1,0 +1,9 @@
+/* 
+@keyframes slide {
+    from{transform: translateX(0);}
+    to {transform: translateX(100px);}
+}
+
+.box.animate{
+    animation: slide 1s ease-out forwards;
+} */

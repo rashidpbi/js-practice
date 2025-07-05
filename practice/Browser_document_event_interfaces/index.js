@@ -166,14 +166,16 @@ document.addEventListener('DOMContentLoaded',()=>{
     console.log("full html content loaded. Dom ready")
 })
 
-window.addEventListener('unload',(e)=>{
-    e.preventDefault() //required for modern sites
-    alert('you just left the previous page')
-    console.log('user left the page')
-})
 window.addEventListener('beforeunload',(e)=>{
-    
+    e.preventDefault() //required for modern sites
+    alert('you are about to leave the  page')
 })
+
+
+document.querySelector('.grandParent').addEventListener('click',(e)=>{
+   console.log("e.target.tagName: ",e.target.tagName)
+})
+
 
 // methods list
 
@@ -194,3 +196,28 @@ window.addEventListener('beforeunload',(e)=>{
 
 //UNDERSTANDING EVENT PROPAGATION:
 
+
+
+
+class MyButton extends HTMLElement{
+    connectedCallback(){
+        this.innerHTML = `<button>click me </button>`
+    }
+}
+
+customElements.define('my-button',MyButton)
+
+window.onload = ()=>{
+    console.log("window loaded")
+}
+//steps followed
+// #custom element 
+// #event delegation 
+
+
+// questions to ponder:
+// does parent  elem automaticaly capture the event happend to its child?
+
+
+//later
+// * consoling e.target object with its prototype

@@ -40,6 +40,7 @@
 // children referes to only element nodes whereas childNodes refers to  all including space and comments 
 
 
+// shadow dom is used to create internal dom inside elements.used for encapsulation.  this is like a private dom . (eg use case: how browser implements its own css for builtin elements like a input type="range" . it has its own css which is generally hidden . )
 
 //querying
 
@@ -117,6 +118,20 @@ element.remove();             // Remove element
 
 // elem.closest(css)  looks for the nearset ancestor that matches the css selector
 
+
+//CUSOTM ELEMENTS
+// custom elements can be created by adding to customElements
+
+// class MyButton extends HTMLElement{
+//     connectedCallback(){
+//         this.innerHTML = `<button>click me </button>`
+//     }
+// }
+
+// customElements.define('my-button',MyButton)
+
+// connectedCallback() gets called when the element is added to the dom
+// disconnectedCallback() runs when element is removed from the dom
 
 
 
