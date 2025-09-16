@@ -84,8 +84,8 @@ Hands-on examples of JavaScript language features:
 
 1. **Clone the repository**:
    ```bash
-   git clone [your-repo-url]
-   cd [repo-name]
+   git clone https://github.com/rashidpbi/js-practice.git
+   cd js-practice
    ```
 
 2. **Explore the documentation**: Start with `docs/1_javascript_language/overview.md` for a comprehensive introduction.
